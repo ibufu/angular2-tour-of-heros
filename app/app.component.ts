@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core'
+import {HeroDetailComponent} from './hero-detail.component';
 
 interface Hero {
     id: number;
@@ -7,6 +8,7 @@ interface Hero {
 
 @Component({
     selector: 'my-app',
+    directives: [HeroDetailComponent],
     styles:[`
       .selected {
         background-color: #CFD8DC !important;
@@ -58,19 +60,14 @@ interface Hero {
     template: `
         <h1>{{title}}</h1>
         <h2>My Heroes</h2>
-        <ul>
-            <li *ngFor="#hero of heroes" (click)="onSelect(hero)">
+        <ul class="heroes">
+            <li *ngFor="#hero of heroes"
+                [class.selected]="hero === selectedHero"
+                (click)="onSelect(hero)">
                 <span class="badge">{{hero.id}}</span> {{hero.name}}
             </li>
         </ul>
-        <div *ngIf="selectedHero">
-            <h2>{{selectedHero.name}} details!</h2>
-            <div><label>id: </label>{{selectedHero.id}}</div>
-            <div>
-                <label>name: </label>
-                <div><input [(ngModel)]="selectedHero.name" placeholder="name"></div>
-            </div>
-        </div>
+        <my-hero-detail [hero]="selectedHero"></my-hero-detail>
         `
 })
 
