@@ -4,18 +4,21 @@
   <title>Angular 2 QuickStart</title>
 
   <!-- 1. Load libraries -->
+  <base href="/">
   <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
   <script src="node_modules/systemjs/dist/system.src.js"></script>
   <script src="node_modules/rxjs/bundles/Rx.js"></script>
   <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+  <script src="node_modules/angular2/bundles/router.dev.js"></script>
 
   <!-- 2. Configure SystemJS -->
   <script>
     System.config({
       packages: {
         app: {
-          format: 'register',
-          defaultExtension: 'js'
+          transpiler: 'typescript',
+          typescriptOptions: { emitDecoratorMetadata: true },
+          packages: {'app': {defaultExtension: 'ts'}}
         }
       }
     });
